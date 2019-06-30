@@ -18,7 +18,7 @@ export default class Usurvey extends Component {
     super(props);
     this.state = {
       uid:uuid.v1(),
-      studentName:'John',
+      studentName:'',
       answers:{
         answer1:'',
         answer2:'',
@@ -40,11 +40,18 @@ else if(e.target.name==='answer2')
 answers.answer2=e.target.value;
 else if(e.target.name==='answer3')
 answers.answer3=e.target.value;
+else if(e.target.name==='answer4')
+answers.answer4=e.target.value;
+else if(e.target.name==='answer5')
+answers.answer5=e.target.value;
 this.setState({answers},()=>console.log(this.state));
-
   }
   questionSubmit(e){
-
+firebase.database().ref('uSurvey/'+this.state.uid).set({
+  studentName:this.state.studentName,
+  answers:this.state.answers
+});
+this.setState({isSubmitted:!this.state.isSubmitted});
   }
   render(){
     let studentName,questions;
@@ -81,6 +88,16 @@ this.setState({answers},()=>console.log(this.state));
         <input type="radio" name="answer3" value="Yes" onChange={this.onChange.bind(this)}/> Yes
         <input type="radio" name="answer3" value="No" onChange={this.onChange.bind(this)}/> No
         <input type="radio" name="answer3" value="MayBe" onChange={this.onChange.bind(this)}/> MayBe
+        </div>
+        <div className="card">
+        <label>Have you done your assignment ?</label><br/>
+        <input type="radio" name="answer4" value="Yes" onChange={this.onChange.bind(this)}/> Yes
+        <input type="radio" name="answer4" value="No" onChange={this.onChange.bind(this)}/> No
+        </div>
+        <div className="card">
+        <label>Is LCO awesome ?</label><br/>
+        <input type="radio" name="answer5" value="Yes" onChange={this.onChange.bind(this)}/> Yes
+        <input type="radio" name="answer5" value="No" onChange={this.onChange.bind(this)}/> No
         </div>
         <input type="submit" className="feedback-button" value="submit"/>
         </form>
