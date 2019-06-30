@@ -24,7 +24,7 @@ export default class Usurvey extends Component {
         answer2:'',
         answer3:''
       },
-      isSubmitted:true
+      isSubmitted:false
     };
     this.nameSubmit=this.nameSubmit.bind(this);
   }
@@ -33,6 +33,14 @@ export default class Usurvey extends Component {
     this.setState({studentName:this.refs.name.value},()=>console.log(this.state));
   }
   onChange(e){
+let answers=this.state.answers;
+if(e.target.name==='answer1')
+answers.answer1=e.target.value;
+else if(e.target.name==='answer2')
+answers.answer2=e.target.value;
+else if(e.target.name==='answer3')
+answers.answer3=e.target.value;
+this.setState({answers},()=>console.log(this.state));
 
   }
   questionSubmit(e){
