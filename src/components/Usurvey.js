@@ -18,19 +18,25 @@ export default class Usurvey extends Component {
     super(props);
     this.state = {
       uid:uuid.v1(),
-      studentName:'',
+      studentName:'John',
       answers:{
         answer1:'',
         answer2:'',
         answer3:''
       },
-      isSubmitted:false
+      isSubmitted:true
     };
     this.nameSubmit=this.nameSubmit.bind(this);
   }
   nameSubmit(e){
     e.preventDefault();
     this.setState({studentName:this.refs.name.value},()=>console.log(this.state));
+  }
+  onChange(e){
+
+  }
+  questionSubmit(e){
+
   }
   render(){
     let studentName,questions;
@@ -47,7 +53,35 @@ export default class Usurvey extends Component {
       studentName=(<h1>
         Welcome to Usurvey, {this.state.studentName}
         </h1>);
-      questions=(<p>Hey</p>);
+      questions=(<div>
+        <h2>Here are some questions :- </h2>
+        <form onSubmit={this.questionSubmit.bind(this)}>
+        <div className="card">
+        <label>What kind of courses you like the most ?</label><br/>
+        <input type="radio" name="answer1" value="Technology" onChange={this.onChange.bind(this)}/> Technology
+        <input type="radio" name="answer1" value="Design" onChange={this.onChange.bind(this)}/> Design
+        <input type="radio" name="answer1" value="Marketing" onChange={this.onChange.bind(this)}/> Marketing
+        </div>
+        <div className="card">
+        <label>You are a :- </label><br/>
+        <input type="radio" name="answer2" value="Student" onChange={this.onChange.bind(this)}/> Student
+        <input type="radio" name="answer2" value="Seeking Job" onChange={this.onChange.bind(this)}/> Seeking Job
+        <input type="radio" name="answer2" value="Doing Job" onChange={this.onChange.bind(this)}/> Doing Job
+        </div>
+        <div className="card">
+        <label>Is online learning helpful to you ?</label><br/>
+        <input type="radio" name="answer3" value="Yes" onChange={this.onChange.bind(this)}/> Yes
+        <input type="radio" name="answer3" value="No" onChange={this.onChange.bind(this)}/> No
+        <input type="radio" name="answer3" value="MayBe" onChange={this.onChange.bind(this)}/> MayBe
+        </div>
+        <input type="submit" className="feedback-button" value="submit"/>
+        </form>
+        </div>);
+    }
+    else if(this.state.isSubmitted===true){
+      studentName=(<h1>
+        Thanks, {this.state.studentName}
+        </h1>);
     }
     return(
       <div>
