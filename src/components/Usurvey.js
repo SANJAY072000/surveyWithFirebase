@@ -26,16 +26,29 @@ export default class Usurvey extends Component {
       },
       isSubmitted:false
     };
+    this.nameSubmit=this.nameSubmit.bind(this);
+  }
+  nameSubmit(e){
+    e.preventDefault();
+    this.setState({studentName:this.refs.name.value},()=>console.log(this.state));
   }
   render(){
     let studentName,questions;
-    if(!(this.state.studentName&&this.state.isSubmitted))
+    if(this.state.studentName===''&&this.state.isSubmitted===false){
     studentName=(<div>
       <h1>Hey, Please tell us your name :- </h1>
-      <form>
-      <input type="text" placeholder="Enter your name" name="name"/>
+      <form onSubmit={this.nameSubmit}>
+      <input className="nany" type="text" placeholder="Enter your name" ref="name"/>
       </form>
     </div>);
+    questions='';
+    }
+    else if(this.state.studentName!==''&&this.state.isSubmitted===false){
+      studentName=(<h1>
+        Welcome to Usurvey, {this.state.studentName}
+        </h1>);
+      questions=(<p>Hey</p>);
+    }
     return(
       <div>
         {studentName}
