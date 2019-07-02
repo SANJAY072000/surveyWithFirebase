@@ -2,13 +2,7 @@ import React,{Component} from 'react';
 let firebase=require('firebase'),
 uuid=require('uuid');
 var firebaseConfig = {
-    apiKey: "AIzaSyDJh8LBHwpve0FyVfhan_hRbgWChT9HZyM",
-    authDomain: "usurvey-70dda.firebaseapp.com",
-    databaseURL: "https://usurvey-70dda.firebaseio.com",
-    projectId: "usurvey-70dda",
-    storageBucket: "usurvey-70dda.appspot.com",
-    messagingSenderId: "13994706922",
-    appId: "1:13994706922:web:53b63f9bfe2448c6"
+   
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
